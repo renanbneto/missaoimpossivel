@@ -1,11 +1,11 @@
 {
-  "name": "missaoimpossivel",
+  "name": "tarefinhas",
   "version": "1.0.0",
-  "description": "- Cadastro de usuarios - calendario de tarefas - notificações - cadastrar tarefas - atribuir tarefas para usuarios - adicionar comentario nas tarefas - alterar a tarefa -  - deletar tarefa - lembrete de tarefa - gerenciar pefil de usuario - prazo para tarefas",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "description": ""
 }
