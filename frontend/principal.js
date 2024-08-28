@@ -2,8 +2,6 @@ $(document).ready(function(){
 
     $.getJSON("http://localhost:3003/listar-tarefas", function(valores){
         
-        console.log(valores)
-
         valores.forEach(function(item, idx){
             let nova = '<li codigo="'+ item._id +'" class="tarefa-item task-item-empty">' 
                 + "<b>"+ item.titulo +"</b>"
@@ -14,6 +12,16 @@ $(document).ready(function(){
         });
 
     });// fim do getJson
+
+    $.getJSON("http://localhost:3003/listar-usuarios", function(usuarios){
+        console.log(usuarios)
+
+        usuarios.forEach(function(item){
+            let opt = '<option value="'+item._id+'">'+ item.nome +'</option>';
+            $("#responsavel-tarefa").append(opt);
+        });
+
+    }); // fim do get usuarios
 
     $("#bt-salvar").click(function(){
 
@@ -39,11 +47,13 @@ $(document).ready(function(){
 
         carregarTarefa(codigo, function(dados){
 
+            let diaIni = dados.dataIni.substr(0, 10);
+            let diaFim = dados.dataFim.substr(0, 10);
             $("#titulo-tarefa").val(dados.titulo);
             $("#descricao-tarefa").val(dados.descricao);
             $("#responsavel-tarefa").val(dados.responsavel);
-            $("#data-inicio").val(dados.dataIni);
-            $("#data-fim").val(dados.dataFim)
+            $("#data-inicio").val(diaIni);
+            $("#data-fim").val(diaFim);
         });
         
     }); // fim do click editar
@@ -62,7 +72,7 @@ $(document).ready(function(){
  */
 function carregarTarefa(id, callback)
 {
-    $.getJSON("http://localhost:3003/listar-tarefas", function(valores){
-        callback(valores[id])
+    $.getJSON("http://localhost:3003/ler-tarefa/"+id, function(valores){
+        callback(valores)
     })
 }
