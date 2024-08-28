@@ -46,6 +46,12 @@ $(document).ready(function(){
 
 });
 
+/**
+ * Carrega os dados da tarefa indicado pelo id
+ * @param {string} id 
+ * @param {function)  callback
+ */
+
 function carregarTarefa(id, callback)
 {
     $.getJSON("/tarefas.json", function(valores){
