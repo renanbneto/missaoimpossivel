@@ -1,11 +1,11 @@
 $(document).ready(function(){
 
-    $.getJSON("/tarefas.json", function(valores){
+    $.getJSON("http://localhost:3003/listar-tarefas", function(valores){
         
         console.log(valores)
 
         valores.forEach(function(item, idx){
-            let nova = '<li codigo="'+idx+'" class="tarefa-item task-item-empty">' 
+            let nova = '<li codigo="'+ item._id +'" class="tarefa-item task-item-empty">' 
                 + "<b>"+ item.titulo +"</b>"
                 + "<p>"+ item.descricao +"</p>"
                 +"</li>";
@@ -39,22 +39,30 @@ $(document).ready(function(){
 
         carregarTarefa(codigo, function(dados){
 
-            console.log(dados);
+            $("#titulo-tarefa").val(dados.titulo);
+            $("#descricao-tarefa").val(dados.descricao);
+            $("#responsavel-tarefa").val(dados.responsavel);
+            $("#data-inicio").val(dados.dataIni);
+            $("#data-fim").val(dados.dataFim)
         });
         
-    }); // fim do click
+    }); // fim do click editar
+
+    $(".nova-tarefa").click(function(){
+        $("input, textarea").removeClass("is-invalid");
+        $("input, textarea").val("");
+    }); // fim click novo tarefa
 
 });
 
 /**
  * Carrega os dados da tarefa indicado pelo id
  * @param {string} id 
- * @param {function)  callback
+ * @param {function} callback 
  */
-
 function carregarTarefa(id, callback)
 {
-    $.getJSON("/tarefas.json", function(valores){
+    $.getJSON("http://localhost:3003/listar-tarefas", function(valores){
         callback(valores[id])
     })
 }
