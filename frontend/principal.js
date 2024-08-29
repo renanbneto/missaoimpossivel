@@ -4,6 +4,7 @@ $(document).ready(function(){
         
         valores.forEach(function(item, idx){
             let nova = '<li codigo="'+ item._id +'" class="tarefa-item task-item-empty">' 
+                + '<span class="bt-del"> X </span>'
                 + "<b>"+ item.titulo +"</b>"
                 + "<p>"+ item.descricao +"</p>"
                 +"</li>";
@@ -87,6 +88,16 @@ $(document).ready(function(){
         $("input, textarea").removeClass("is-invalid");
         $("input, textarea").val("");
     }); // fim click novo tarefa
+
+    $("body").on("click", ".bt-del", function(ev){
+        ev.stopPropagation();
+        let codigo = $(this).parent().attr("codigo");
+
+        $.post("http://localhost:3003/deletar-tarefa/"+codigo, function(valor){
+            location.reload();
+        });
+
+    });
 
 });
 

@@ -1,4 +1,4 @@
-const express = require("express");
+edirconst express = require("express");
 const app = express();
 
 const cors = require("cors");
@@ -34,6 +34,17 @@ app.post("/cadastro-tarefa", async function(req, res){
         retorno = await col.updateOne({_id: novoid}, {$set: req.body})
     }
 
+    res.json(retorno);
+
+});
+
+app.post("/deletar-tarefa/:id", async function(req, res){
+
+    const id = new ObjectId(req.params.id);
+    const mongo = await conexao.connect();
+    const col = mongo.db("renan").collection("tarefas");
+
+    let retorno = await col.deleteOne({_id: id});
     res.json(retorno);
 
 });
